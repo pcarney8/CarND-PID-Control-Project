@@ -23,9 +23,10 @@ void PID::UpdateError(double cte) {
 }
 
 double PID::TotalError() {
-//returns steering angle becuase we have all the info here
+    //returns steering angle becuase we have all the info here
+    double steer_value = -Kp * p_error - Kd * d_error - Ki * i_error;
+    steer_value = steer_value < -1 ? -1 : steer_value;
+    steer_value = steer_value > 1 ? 1 : steer_value;
 
-    return -Kp * p_error - Kd * d_error - Ki * i_error;
-
-
+    return steer_value;
 }

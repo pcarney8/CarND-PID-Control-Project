@@ -33,9 +33,9 @@ int main()
   uWS::Hub h;
 
   PID pid;
-  pid.Init(0.071769, 0.00411344, 0.974954);
+  pid.Init(0.071768, 0.00411343, 0.974957);
   PID speedPid;
-  speedPid.Init(.125 , .0001 , 0.797906);
+  speedPid.Init(.125 , .0001 , 0.797905);
 
   h.onMessage([&pid, &speedPid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
@@ -57,7 +57,7 @@ int main()
           pid.UpdateError(cte);
           steer_value = pid.TotalError();
 
-	  double targetSpeed = 30.*(1.-abs(steer_value)) + 20.;
+	  double targetSpeed = 30.*(1.-abs(steer_value)) + 15.;
           speedPid.UpdateError(speed - targetSpeed);
 	  double speed_value = speedPid.TotalError();
          

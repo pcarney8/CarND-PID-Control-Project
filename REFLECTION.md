@@ -1,5 +1,10 @@
 ## Describe the effect each of the P, I, D components had in your implementation.
+Increasing the `P` hyperparameter would make the car a bit smoother through the turns but would ultimately result in a fairly sinusodal performance in the straigher portions. just a good bit of constant back and forth rocking across the correct track. 
 
+When the `I` hyperparameter started at the much larger value I picked, it would still tend to weave back and forth (like an increase in P), but not nearly as significant or as constant, which is good. but it would drift towards the edges a bit and make it slower to come back to the center of the track. 
+
+A lower `D` hyperparameter resulted in much more cut backs, it seems to let the car drive in a more "human" like manner because it was overall less herky-jerky in terms of the motion, but the car would drift from the cte, and then make sudden cut back to correct itself suddenly. 
 
 ## Describe how the final hyperparameters were chosen.
+
 I started my hyperparameters with the base values from Sebastian's lecture, they didn't seem to be doing the best with a throttle speed of just 0.5, so I reduced the throttle speed to see if that would help, and it didn't. It was still turning very dramatically all the way left or right. I continued adjusting my PID parameters to not much avail. I looked into the forums and saw suggestions from other students, I noticed that my `P` parameter was fairly close but `I` was pretty far off and `D` was ok, but not very close. Trying some other numbers near the suggestions, helped a bit, but not as significant as implementing the `speedPid` controller. I decided to try it because back when we did the behavioral cloning assignment, I spent hours and hours trying to fine tune my data set, but ultimately, once I added an additional suggested piece, it worked many times better. The `speedPid` controller helped significantly because it would slow down enough when the `cte` got crazy. Overall, if I did it again (and had more time) I would implement the twiddle or SGD algorithm to help speed up the overall hyperparameter tuning. 
